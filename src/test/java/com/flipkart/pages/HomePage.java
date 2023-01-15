@@ -108,8 +108,6 @@ public class HomePage {
         selectFromDropDown(getStateDropDown(),"Odisha");
         clickWithJsExecutor(getDeclareCheckBox());
         clickWithJsExecutor(getSubmitButton());
-
-
     }
     public void formWithEmptyData(){
         clickWithJsExecutor(getSubmitButton());
