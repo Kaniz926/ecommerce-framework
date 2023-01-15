@@ -4,9 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
-import javax.swing.*;
-import java.sql.SQLOutput;
-
 public class HomePage {
     public WebDriver driver;
 
@@ -19,7 +16,7 @@ public class HomePage {
     By emailId = By.id("inputEmail");
     By mobileNumber = By.id("inputNumber");
     By currentAddress = By.id("inputCAddress");
-    By permannetAddress = By.id("inputPAddress");
+    By permanentAddress = By.id("inputPAddress");
     By city = By.id("inputCity");
     By dateOfBirth = By.id("inputDate");
     By declareCheckBox = By.id("gridCheck");
@@ -53,7 +50,7 @@ public class HomePage {
     }
 
     public WebElement getPermanentAddress() {
-        return driver.findElement(permannetAddress);
+        return driver.findElement(permanentAddress);
     }
 
     public WebElement getCity() {
@@ -75,16 +72,32 @@ public class HomePage {
     public WebElement getSubmitButton() {
         return driver.findElement(submitButton);
     }
-    public WebElement getFormName(){return driver.findElement(formName);}
-    public WebElement getFormEmail(){return driver.findElement(formEmail);}
-    public WebElement getFormCurrentAddress(){return driver.findElement(formCurrentAddress);}
-    public WebElement getFormPhoneNo(){return driver.findElement(formPhoneNo);}
-    public WebElement getFomCity(){return driver.findElement(formShowCity);}
-    public WebElement getFormDOB(){return driver.findElement(formDOB);}
 
+    public WebElement getFormName() {
+        return driver.findElement(formName);
+    }
 
+    public WebElement getFormEmail() {
+        return driver.findElement(formEmail);
+    }
 
-    public void fillTheRequiredForm() throws InterruptedException {
+    public WebElement getFormCurrentAddress() {
+        return driver.findElement(formCurrentAddress);
+    }
+
+    public WebElement getFormPhoneNo() {
+        return driver.findElement(formPhoneNo);
+    }
+
+    public WebElement getFomCity() {
+        return driver.findElement(formShowCity);
+    }
+
+    public WebElement getFormDOB() {
+        return driver.findElement(formDOB);
+    }
+
+    public void fillTheRequiredForm() {
         getFirstName().sendKeys("Kaniz");
         getEmailId().sendKeys("kanizthoughts@gmail.com");
         getCurrentAddress().sendKeys("Noida Sector 19 A block");
@@ -93,7 +106,6 @@ public class HomePage {
         getDateOfBirth().sendKeys("26/12/1996");
         clickWithJsExecutor(getDeclareCheckBox());
         clickWithJsExecutor(getSubmitButton());
-
     }
 
     public void formWithAllFields() {
@@ -105,11 +117,12 @@ public class HomePage {
         getCity().sendKeys("Noida");
         getMobileNumber().sendKeys("7846828014");
         getDateOfBirth().sendKeys("26/12/1996");
-        selectFromDropDown(getStateDropDown(),"Odisha");
+        selectFromDropDown(getStateDropDown(), "Odisha");
         clickWithJsExecutor(getDeclareCheckBox());
         clickWithJsExecutor(getSubmitButton());
     }
-    public void formWithEmptyData(){
+
+    public void formWithEmptyData() {
         clickWithJsExecutor(getSubmitButton());
         acceptAlert();
     }
@@ -117,55 +130,49 @@ public class HomePage {
     public void clickWithJsExecutor(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", element);
-
     }
 
     public void selectFromDropDown(WebElement element, String visibleText) {
         Select select = new Select(element);
         select.selectByVisibleText(visibleText);
-
     }
-    public void acceptAlert()
-    {
+
+    public void acceptAlert() {
         Alert alert = driver.switchTo().alert();
         String alertMessage = driver.switchTo().alert().getText();
         System.out.println(alertMessage);
         alert.accept();
     }
-    public void verifyRequiredFormValues(SoftAssert assertion){
-        assertion = new SoftAssert();
-        System.out.println("Name Text"+getFormName().getText());
+
+    public void verifyRequiredFormValues(SoftAssert assertion) {
+        System.out.println("Name Text" + getFormName().getText());
         assertion.assertTrue(getFormName().getText().contains("Kaniz"));
-        System.out.println("Email text"+getFormEmail().getText());
+        System.out.println("Email text" + getFormEmail().getText());
         assertion.assertTrue(getFormEmail().getText().contains("kanizthoughts@gmail.com"));
-        System.out.println("Current Address"+ getFormCurrentAddress().getText());
+        System.out.println("Current Address" + getFormCurrentAddress().getText());
         assertion.assertTrue(getFormCurrentAddress().getText().contains("Noida"));
-        System.out.println("Phone No"+ getFormPhoneNo().getText());
+        System.out.println("Phone No" + getFormPhoneNo().getText());
         assertion.assertTrue(getFormPhoneNo().getText().contains("7846828014"));
-        System.out.println("City Name"+getFomCity().getText());
+        System.out.println("City Name" + getFomCity().getText());
         assertion.assertTrue(getFomCity().getText().contains("Noida Sector 19 A block"));
-        System.out.println("Date of Birth" +getFormDOB().getText());
+        System.out.println("Date of Birth" + getFormDOB().getText());
         assertion.assertTrue(getFormDOB().getText().contains("1996-12-26"));
         assertion.assertAll();
     }
-    public void VerifyAllFieldsFormValues(SoftAssert assertion){
-        assertion = new SoftAssert();
-        System.out.println("Name Text"+getFormName().getText());
+
+    public void verifyAllFieldsFormValues(SoftAssert assertion) {
+        System.out.println("Name Text" + getFormName().getText());
         assertion.assertTrue(getFormName().getText().contains("Kaniz"));
-        System.out.println("Email text"+getFormEmail().getText());
+        System.out.println("Email text" + getFormEmail().getText());
         assertion.assertTrue(getFormEmail().getText().contains("kanizthoughts@gmail.com"));
-        System.out.println("Current Address"+ getFormCurrentAddress().getText());
+        System.out.println("Current Address" + getFormCurrentAddress().getText());
         assertion.assertTrue(getFormCurrentAddress().getText().contains("Noida"));
-        System.out.println("Phone No"+ getFormPhoneNo().getText());
+        System.out.println("Phone No" + getFormPhoneNo().getText());
         assertion.assertTrue(getFormPhoneNo().getText().contains("7846828014"));
-        System.out.println("City Name"+getFomCity().getText());
+        System.out.println("City Name" + getFomCity().getText());
         assertion.assertTrue(getFomCity().getText().contains("Noida Sector 19 A block"));
-        System.out.println("Date of Birth" +getFormDOB().getText());
+        System.out.println("Date of Birth" + getFormDOB().getText());
         assertion.assertTrue(getFormDOB().getText().contains("1996-12-26"));
         assertion.assertAll();
-
     }
-
-
-
 }
