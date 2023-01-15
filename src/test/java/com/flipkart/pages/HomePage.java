@@ -2,8 +2,10 @@ package com.flipkart.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.asserts.SoftAssert;
 
 import javax.swing.*;
+import java.sql.SQLOutput;
 
 public class HomePage {
     public WebDriver driver;
@@ -23,6 +25,12 @@ public class HomePage {
     By declareCheckBox = By.id("gridCheck");
     By stateDropdown = By.id("inputState");
     By submitButton = By.xpath("//button[@type='submit']");
+    By formName = By.id("showName");
+    By formEmail = By.id("showEmail");
+    By formCurrentAddress = By.id("showCurrantAddress");
+    By formPhoneNo = By.id("showPhoneNo");
+    By formShowCity = By.id("showCity");
+    By formDOB = By.id("showDateOBirth");
 
     public WebElement getFirstName() {
         return driver.findElement(firstName);
@@ -67,6 +75,13 @@ public class HomePage {
     public WebElement getSubmitButton() {
         return driver.findElement(submitButton);
     }
+    public WebElement getFormName(){return driver.findElement(formName);}
+    public WebElement getFormEmail(){return driver.findElement(formEmail);}
+    public WebElement getFormCurrentAddress(){return driver.findElement(formCurrentAddress);}
+    public WebElement getFormPhoneNo(){return driver.findElement(formPhoneNo);}
+    public WebElement getFomCity(){return driver.findElement(formShowCity);}
+    public WebElement getFormDOB(){return driver.findElement(formDOB);}
+
 
 
     public void fillTheRequiredForm() throws InterruptedException {
@@ -78,6 +93,7 @@ public class HomePage {
         getDateOfBirth().sendKeys("26/12/1996");
         clickWithJsExecutor(getDeclareCheckBox());
         clickWithJsExecutor(getSubmitButton());
+
     }
 
     public void formWithAllFields() {
@@ -92,6 +108,7 @@ public class HomePage {
         selectFromDropDown(getStateDropDown(),"Odisha");
         clickWithJsExecutor(getDeclareCheckBox());
         clickWithJsExecutor(getSubmitButton());
+
 
     }
     public void formWithEmptyData(){
@@ -117,6 +134,40 @@ public class HomePage {
         System.out.println(alertMessage);
         alert.accept();
     }
+    public void verifyRequiredFormValues(SoftAssert assertion){
+        assertion = new SoftAssert();
+        System.out.println("Name Text"+getFormName().getText());
+        assertion.assertTrue(getFormName().getText().contains("Kaniz"));
+        System.out.println("Email text"+getFormEmail().getText());
+        assertion.assertTrue(getFormEmail().getText().contains("kanizthoughts@gmail.com"));
+        System.out.println("Current Address"+ getFormCurrentAddress().getText());
+        assertion.assertTrue(getFormCurrentAddress().getText().contains("Noida"));
+        System.out.println("Phone No"+ getFormPhoneNo().getText());
+        assertion.assertTrue(getFormPhoneNo().getText().contains("7846828014"));
+        System.out.println("City Name"+getFomCity().getText());
+        assertion.assertTrue(getFomCity().getText().contains("Noida Sector 19 A block"));
+        System.out.println("Date of Birth" +getFormDOB().getText());
+        assertion.assertTrue(getFormDOB().getText().contains("1996-12-26"));
+        assertion.assertAll();
+    }
+    public void VerifyAllFieldsFormValues(SoftAssert assertion){
+        assertion = new SoftAssert();
+        System.out.println("Name Text"+getFormName().getText());
+        assertion.assertTrue(getFormName().getText().contains("Kaniz"));
+        System.out.println("Email text"+getFormEmail().getText());
+        assertion.assertTrue(getFormEmail().getText().contains("kanizthoughts@gmail.com"));
+        System.out.println("Current Address"+ getFormCurrentAddress().getText());
+        assertion.assertTrue(getFormCurrentAddress().getText().contains("Noida"));
+        System.out.println("Phone No"+ getFormPhoneNo().getText());
+        assertion.assertTrue(getFormPhoneNo().getText().contains("7846828014"));
+        System.out.println("City Name"+getFomCity().getText());
+        assertion.assertTrue(getFomCity().getText().contains("Noida Sector 19 A block"));
+        System.out.println("Date of Birth" +getFormDOB().getText());
+        assertion.assertTrue(getFormDOB().getText().contains("1996-12-26"));
+        assertion.assertAll();
+
+    }
+
 
 
 }
