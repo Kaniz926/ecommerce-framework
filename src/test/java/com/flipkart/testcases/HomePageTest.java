@@ -35,6 +35,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void verifyTheFormWithEmptyFields() {
         homePage.formWithEmptyData();
+        homePage.verifyAlertDisplayed(assertion);
     }
 
     @AfterMethod
